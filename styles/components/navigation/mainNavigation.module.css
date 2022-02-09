@@ -9,13 +9,13 @@
   align-items: center;
 }
 
-.mainNavigation .leftSide .navbarDesktop {
+.mainNavigation .leftSide .navbarDesktopMode {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.mainNavigation .leftSide .navbarDesktop nav ul {
+.mainNavigation .leftSide .navbarDesktopMode nav ul {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -56,12 +56,12 @@
   align-items: center;
 }
 
-.mainNavigation .rightSide .isShowMode {
+.mainNavigation .rightSide .showMode {
   display: none;
 }
 
 @media only screen and (max-width: 767px) {
-  .mainNavigation .rightSide .isShowMode {
+  .mainNavigation .rightSide .showMode {
     display: block;
     margin-left: 1rem;
     cursor: pointer;
@@ -69,7 +69,7 @@
   .mainNavigation .leftSide .navbar {
     display: none;
   }
-  .mainNavigation .leftSide .navbarDesktop {
+  .mainNavigation .leftSide .navbarDesktopMode {
     display: none;
   }
 }
