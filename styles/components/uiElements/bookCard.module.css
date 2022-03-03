@@ -1,0 +1,32 @@
+.bookCard {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.bookCard .category {
+  min-width: 100%;
+  border-radius: 5px;
+  background-color: rgb(224, 22, 22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bookCard .category h3 {
+  margin-top: 6px;
+  color: white;
+  text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+  .bookCard {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .info {
+    margin-bottom: 20px;
+  }
+}
