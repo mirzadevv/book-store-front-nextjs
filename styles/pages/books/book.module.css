@@ -1,0 +1,44 @@
+.book {
+  margin: 0 3rem;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  height: 100vh;
+  gap: 1rem;
+}
+
+.book .item {
+  border: 1px solid blue;
+}
+
+.book .cover {
+  grid-row-start: 1;
+  grid-row-end: 4;
+}
+
+.book .mainInfo {
+  grid-column-start: 2;
+  grid-column-end: 4;
+}
+
+.book .mainInfo .title {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  display: flex;
+  flex-direction: column;
+}
+
+.book .mainInfo .title h2 {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.book .mainInfo .title p {
+  margin-top: -1rem;
+}
+
+.book .fourth {
+  grid-column-start: 2;
+  grid-column-end: 5;
+  grid-row-start: 2;
+  grid-row-end: 4;
+}
