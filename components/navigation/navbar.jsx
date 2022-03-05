@@ -14,11 +14,6 @@ const Navbar = () => {
             <a> Authors </a>
           </Link>
         </li>
-        <li>
-          <Link href="/publishers">
-            <a> Publishers </a>
-          </Link>
-        </li>
       </ul>
     </nav>
   );
