@@ -1,7 +1,7 @@
 .book {
   margin: 0 3rem;
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   height: 100vh;
   gap: 1rem;
 }
@@ -20,25 +20,76 @@
   grid-column-end: 4;
 }
 
-.book .mainInfo .title {
+.book .mainInfo .firstMainInfo {
   grid-column-start: 2;
   grid-column-end: 4;
   display: flex;
   flex-direction: column;
 }
 
-.book .mainInfo .title h2 {
+.book .mainInfo .firstMainInfo .bookTitle {
   text-transform: uppercase;
   font-weight: bold;
 }
 
-.book .mainInfo .title p {
+.book .mainInfo .firstMainInfo .authorTitle {
   margin-top: -1rem;
 }
 
-.book .fourth {
+.book .description {
   grid-column-start: 2;
   grid-column-end: 5;
   grid-row-start: 2;
   grid-row-end: 4;
+}
+
+.book .description .description {
+  font-size: 1rem;
+  margin-bottom: 5rem;
+}
+
+.book .description .relatedBooksContainer {
+  font-size: 1rem;
+  display: flex;
+  border: 1px solid red;
+}
+
+.book .description .relatedBooksContainer .relatedBookItem {
+  height: 200px;
+  width: 150px;
+  border: 1px solid green;
+  margin-right: 1rem;
+}
+
+.book .description .relatedBooksTitle {
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.book .mainInfo .secondMainInfo {
+  display: grid;
+  grid-template-columns: 0.5fr 3fr;
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+.book .mainInfo .secondMainInfo .title {
+  color: rgb(78, 74, 74);
+  text-transform: uppercase;
+}
+
+.book .mainInfo .secondMainInfo .value {
+  text-transform: uppercase;
+}
+
+.book .mainInfo .button {
+  background-color: #e01616;
+  width: 150px;
+  margin-top: 2rem;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  color: rgb(241, 233, 233);
+  cursor: pointer;
 }
