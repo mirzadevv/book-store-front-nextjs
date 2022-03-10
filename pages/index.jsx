@@ -3,7 +3,7 @@ import MainSwiper from "../components/uiElements/swiper";
 import styles from "../styles/pages/index.module.css";
 import { API_URL } from "../config/index";
 
-export default function Home({ booksData }) {
+export default function Home({ uniqueBooksCategory }) {
   return (
     <div>
       <Head>
@@ -12,19 +12,40 @@ export default function Home({ booksData }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <MainSwiper booksData={booksData} />
+        <MainSwiper booksData={uniqueBooksCategory} />
       </main>
     </div>
   );
 }
 
 export async function getServerSideProps() {
-  const response = await fetch(
-    `${API_URL}/api/books?populate=category,image,author`
+  const qs = require("qs");
+  const query = qs.stringify(
+    {
+      populate: "*",
+      sort: ["createdAt:desc"],
+    },
+    {
+      encodeValuesOnly: true,
+    }
   );
+
+  const response = await fetch(`${API_URL}/api/books?${query}`);
   const result = await response.json();
-  const booksData = result.data.slice(0, 8);
+  const booksData = result.data.slice(0, 20);
+  const uniqueBooksCategory = [];
+  const fields = [];
+  booksData.forEach((element) => {
+    const isIncluded = fields.includes(
+      element.attributes.category.data.attributes.title
+    );
+    if (!isIncluded) {
+      fields.push(element.attributes.category.data.attributes.title);
+      uniqueBooksCategory.push(element);
+    }
+  });
+
   return {
-    props: { booksData, revalidate: 1 },
+    props: { uniqueBooksCategory },
   };
 }
