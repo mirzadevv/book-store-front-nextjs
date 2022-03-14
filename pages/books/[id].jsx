@@ -10,10 +10,20 @@ const Book = ({ bookData, relatedeBooksData, randomReadingPerk }) => {
   const { category: categoryAtributes } = bookData.data.attributes;
   const { publisher: publisherAttributes } = bookData.data.attributes;
   const readingPerkSrcImg = `${API_URL}${randomReadingPerk?.attributes?.image?.data?.attributes?.url}`;
+  const bookSrcImg = `${API_URL}${bookAttributes?.image?.data[0]?.attributes?.url}`;
 
   return (
     <div className={styles.book}>
-      <div className={`${styles.item} ${styles.cover}`}>Cover</div>
+      <div className={`${styles.item} ${styles.cover}`}>
+        <Image
+          loader={() => {
+            return bookSrcImg;
+          }}
+          src={bookSrcImg}
+          width={200}
+          height={250}
+        />
+      </div>
       <div className={`${styles.item} ${styles.mainInfo}`}>
         <div className={styles.firstMainInfo}>
           <h2 className={styles.bookTitle}>{bookAttributes.title}</h2>
