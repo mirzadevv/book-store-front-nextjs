@@ -6,9 +6,9 @@
   gap: 1rem;
 }
 
-.book .item {
+/* .book .item {
   border: 1px solid blue;
-}
+} */
 
 .book .cover {
   grid-row-start: 1;
@@ -18,6 +18,11 @@
 .book .mainInfo {
   grid-column-start: 2;
   grid-column-end: 4;
+}
+
+.book .mainInfo .description {
+  font-size: 0.95rem;
+  margin-top: 1rem;
 }
 
 .book .mainInfo .firstMainInfo {
@@ -36,35 +41,33 @@
   margin-top: -1rem;
 }
 
-.book .description {
+.book .relatedBooks {
   grid-column-start: 2;
   grid-column-end: 5;
   grid-row-start: 2;
   grid-row-end: 4;
+  margin-top: 5rem;
 }
 
-.book .description .description {
+/* .book .relatedBooks .description {
   font-size: 1rem;
   margin-bottom: 5rem;
-}
+} */
 
-.book .description .relatedBooksContainer {
+.book .relatedBooks .relatedBooksContainer {
   font-size: 1rem;
   display: flex;
-  border: 1px solid red;
 }
 
-.book .description .relatedBooksContainer .relatedBookItem {
+.book .relatedBooks .relatedBooksContainer .relatedBookItem {
   height: 200px;
   width: 150px;
-  border: 1px solid green;
   margin-right: 1rem;
 }
 
-.book .description .relatedBooksTitle {
-  margin-bottom: 1rem;
+.book .relatedBooks .relatedBooksTitle {
   text-transform: uppercase;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .book .mainInfo .secondMainInfo {
