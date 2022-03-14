@@ -2,13 +2,14 @@ import React from "react";
 import { API_URL } from "../../config/index";
 import styles from "../../styles/pages/books/book.module.css";
 import BookCard from "../../components/uiElements/bookCard";
-import ReadingPerk from "../../components/uiElements/readingPerk";
+import Image from "next/image";
 
-const Book = ({ bookData, relatedeBooksData }) => {
+const Book = ({ bookData, relatedeBooksData, randomReadingPerk }) => {
   const { attributes: bookAttributes } = bookData.data;
   const { author: authorAttributes } = bookData.data.attributes;
   const { category: categoryAtributes } = bookData.data.attributes;
   const { publisher: publisherAttributes } = bookData.data.attributes;
+  const readingPerkSrcImg = `${API_URL}${randomReadingPerk?.attributes?.image?.data?.attributes?.url}`;
 
   return (
     <div className={styles.book}>
@@ -32,13 +33,25 @@ const Book = ({ bookData, relatedeBooksData }) => {
           <h4 className={styles.title}>Year</h4>
           <p className={styles.value}>2020</p>
         </div>
+        <div className={`${styles.description}`}>
+          <p className={styles.description}>{bookAttributes.description}</p>
+        </div>
         <button className={styles.button}>Order</button>
       </div>
       <div className={`${styles.item}`}>
-        <ReadingPerk />
+        <div className={styles.readingPerk}>
+          <Image
+            loader={() => {
+              return readingPerkSrcImg;
+            }}
+            src={readingPerkSrcImg}
+            width={160}
+            height={160}
+          />
+          <p> {randomReadingPerk.attributes.title} </p>
+        </div>
       </div>
-      <div className={`${styles.item} ${styles.description}`}>
-        <p className={styles.description}>{bookAttributes.description}</p>
+      <div className={`${styles.item} ${styles.relatedBooks}`}>
         <h3 className={styles.relatedBooksTitle}>You will also like</h3>
         <div className={styles.relatedBooksContainer}>
           {relatedeBooksData.map((item) => (
@@ -87,12 +100,20 @@ export async function getServerSideProps({ query }) {
     (item) => item.attributes.title !== bookTitle
   );
 
-  fetch(`${API_URL}/api/books`);
+  const readingPerksResponse = await fetch(
+    `${API_URL}/api/reading-perks?populate=*`
+  );
+  const { data: readingPerkData } = await readingPerksResponse.json();
+  const randomReadingPerkIndex = Math.floor(
+    Math.random() * readingPerkData.length
+  );
+  const randomReadingPerk = readingPerkData[randomReadingPerkIndex];
 
   return {
     props: {
       bookData,
       relatedeBooksData,
+      randomReadingPerk,
     },
   };
 }
