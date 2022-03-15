@@ -48,18 +48,16 @@ const Book = ({ bookData, relatedeBooksData, randomReadingPerk }) => {
         </div>
         <button className={styles.button}>Order</button>
       </div>
-      <div className={`${styles.item}`}>
-        <div className={styles.readingPerk}>
-          <Image
-            loader={() => {
-              return readingPerkSrcImg;
-            }}
-            src={readingPerkSrcImg}
-            width={160}
-            height={160}
-          />
-          <p> {randomReadingPerk.attributes.title} </p>
-        </div>
+      <div className={`${styles.item} ${styles.readingPerk}`}>
+        <Image
+          loader={() => {
+            return readingPerkSrcImg;
+          }}
+          src={readingPerkSrcImg}
+          width={160}
+          height={160}
+        />
+        <p> {randomReadingPerk.attributes.title} </p>
       </div>
       <div className={`${styles.item} ${styles.relatedBooks}`}>
         <h3 className={styles.relatedBooksTitle}>You will also like</h3>
