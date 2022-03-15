@@ -6,10 +6,6 @@
   gap: 1rem;
 }
 
-/* .book .item {
-  border: 1px solid blue;
-} */
-
 .book .cover {
   grid-row-start: 1;
   grid-row-end: 4;
@@ -44,15 +40,8 @@
 .book .relatedBooks {
   grid-column-start: 2;
   grid-column-end: 5;
-  grid-row-start: 2;
-  grid-row-end: 4;
-  margin-top: 5rem;
+  margin-top: 4rem;
 }
-
-/* .book .relatedBooks .description {
-  font-size: 1rem;
-  margin-bottom: 5rem;
-} */
 
 .book .relatedBooks .relatedBooksContainer {
   font-size: 1rem;
@@ -72,8 +61,7 @@
 
 .book .mainInfo .secondMainInfo {
   display: grid;
-  grid-template-columns: 0.5fr 3fr;
-  width: 100%;
+  grid-template-columns: 1fr 3fr;
   margin-top: 1.5rem;
 }
 
@@ -89,10 +77,33 @@
 .book .mainInfo .button {
   background-color: #e01616;
   width: 150px;
-  margin-top: 2rem;
+  margin-top: 1rem;
   border: none;
   padding: 5px;
   border-radius: 5px;
   color: rgb(241, 233, 233);
   cursor: pointer;
+}
+
+@media only screen and (max-width: 970px) {
+  .book .cover {
+    display: none;
+  }
+
+  .book .mainInfo {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 3;
+  }
+
+  .book .relatedBooks {
+    grid-column-start: 1;
+    grid-column-end: 5;
+    margin-top: 2rem;
+  }
+
+  .book .readingPerk {
+    display: none;
+  }
 }
