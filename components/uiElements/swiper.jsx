@@ -41,7 +41,7 @@ const MainSwiper = ({ booksData }) => {
     >
       {booksData?.map((item) => (
         <SwiperSlide key={item.id}>
-          <BookCard bookData={item} type="large" />
+          <BookCard bookData={item} type="large" categoryMode={true} />
         </SwiperSlide>
       ))}
     </Swiper>
