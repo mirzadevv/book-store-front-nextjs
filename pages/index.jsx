@@ -1,5 +1,6 @@
 import Head from "next/head";
 import MainSwiper from "../components/uiElements/swiper";
+import CategoryButtons from "../components/categoryButtons/categoryButtons";
 import styles from "../styles/pages/index.module.css";
 import { API_URL } from "../config/index";
 
@@ -13,6 +14,7 @@ export default function Home({ uniqueBooksCategory }) {
       </Head>
       <main className={styles.main}>
         <MainSwiper booksData={uniqueBooksCategory} />
+        <CategoryButtons />
       </main>
     </div>
   );
