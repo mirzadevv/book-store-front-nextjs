@@ -1,10 +1,37 @@
 import Head from "next/head";
 import MainSwiper from "../components/uiElements/swiper";
-import CategoryButtons from "../components/categoryButtons/categoryButtons";
+import CategoryButtons from "../components/categoryButtons";
+import BooksByCategory from "../components/booksByCategory";
 import styles from "../styles/pages/index.module.css";
 import { API_URL } from "../config/index";
+import { useState } from "react";
 
 export default function Home({ uniqueBooksCategory, categories }) {
+  const [booksByCategory, setBooksByCategory] = useState([]);
+  const [isLoaingBooksByCategory, setIsLoaingBooksByCategory] = useState(false);
+  async function getBooksByCategory({ title: categoryTitle }) {
+    const qs = require("qs");
+    const query = qs.stringify(
+      {
+        populate: "*",
+        filters: {
+          category: {
+            title: {
+              $eq: categoryTitle,
+            },
+          },
+        },
+      },
+      {
+        encodeValuesOnly: true,
+      }
+    );
+    setIsLoaingBooksByCategory(true);
+    const response = await fetch(`http://localhost:1337/api/books?${query}`);
+    const data = await response.json();
+    setBooksByCategory(data);
+    setIsLoaingBooksByCategory(false);
+  }
   return (
     <div>
       <Head>
@@ -14,7 +41,11 @@ export default function Home({ uniqueBooksCategory, categories }) {
       </Head>
       <main className={styles.main}>
         <MainSwiper booksData={uniqueBooksCategory} />
-        <CategoryButtons categories={categories} />
+        <CategoryButtons categories={categories} onClick={getBooksByCategory} />
+        <BooksByCategory
+          booksByCategory={booksByCategory}
+          isLoading={isLoaingBooksByCategory}
+        />
       </main>
     </div>
   );
