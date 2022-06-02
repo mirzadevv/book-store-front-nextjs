@@ -60,11 +60,15 @@ const Book = ({ bookData, relatedeBooksData, randomReadingPerk }) => {
         <p> {randomReadingPerk.attributes.title} </p>
       </div>
       <div className={`${styles.item} ${styles.relatedBooks}`}>
-        <h3 className={styles.relatedBooksTitle}>You will also like</h3>
+        <h2 className={styles.relatedBooksTitle}>You will also like</h2>
         <div className={styles.relatedBooksContainer}>
-          {relatedeBooksData.map((item) => (
-            <BookCard key={item.id} bookData={item} type="small" />
-          ))}
+          {relatedeBooksData.length !== 0 ? (
+            relatedeBooksData.map((item) => (
+              <BookCard key={item.id} bookData={item} type="small" />
+            ))
+          ) : (
+            <p> THERE ARE NO RELATED BOOKS </p>
+          )}
         </div>
       </div>
     </div>
