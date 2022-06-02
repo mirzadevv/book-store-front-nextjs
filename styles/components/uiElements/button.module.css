@@ -1,0 +1,21 @@
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 3rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+
+.categoryButton {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid gray;
+}
+
+.categoryButton:hover {
+  background-color: #000;
+  color: #fff;
+  transition: all 0.2s;
+}
