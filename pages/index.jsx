@@ -20,7 +20,7 @@ export default function Home({ uniqueBooksCategory }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const qs = require("qs");
   const query = qs.stringify(
     {
@@ -49,5 +49,6 @@ export async function getServerSideProps() {
 
   return {
     props: { uniqueBooksCategory },
+    revalidate: 30,
   };
 }
