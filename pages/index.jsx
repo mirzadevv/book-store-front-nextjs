@@ -4,7 +4,7 @@ import CategoryButtons from "../components/categoryButtons/categoryButtons";
 import styles from "../styles/pages/index.module.css";
 import { API_URL } from "../config/index";
 
-export default function Home({ uniqueBooksCategory }) {
+export default function Home({ uniqueBooksCategory, categories }) {
   return (
     <div>
       <Head>
@@ -14,7 +14,7 @@ export default function Home({ uniqueBooksCategory }) {
       </Head>
       <main className={styles.main}>
         <MainSwiper booksData={uniqueBooksCategory} />
-        <CategoryButtons />
+        <CategoryButtons categories={categories} />
       </main>
     </div>
   );
@@ -22,7 +22,7 @@ export default function Home({ uniqueBooksCategory }) {
 
 export async function getStaticProps() {
   const qs = require("qs");
-  const query = qs.stringify(
+  const descendingBooksQuery = qs.stringify(
     {
       populate: "*",
       sort: ["createdAt:desc"],
@@ -32,9 +32,11 @@ export async function getStaticProps() {
     }
   );
 
-  const response = await fetch(`${API_URL}/api/books?${query}`);
-  const result = await response.json();
-  const booksData = result.data.slice(0, 20);
+  const responsedBooks = await fetch(
+    `${API_URL}/api/books?${descendingBooksQuery}`
+  );
+  const books = await responsedBooks.json();
+  const booksData = books.data.slice(0, 20);
   const uniqueBooksCategory = [];
   const fields = [];
   booksData.forEach((element) => {
@@ -47,8 +49,13 @@ export async function getStaticProps() {
     }
   });
 
+  const responsedCategories = await fetch(
+    "http://localhost:1337/api/categories"
+  );
+  const categories = await responsedCategories.json();
+
   return {
-    props: { uniqueBooksCategory },
+    props: { uniqueBooksCategory, categories },
     revalidate: 30,
   };
 }
