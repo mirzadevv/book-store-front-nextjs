@@ -4,7 +4,7 @@ import Link from "next/link";
 import styles from "../../styles/components/uiElements/bookCard.module.css";
 import { API_URL } from "../../config/index";
 
-const BookCard = ({ bookData, type }) => {
+const BookCard = ({ bookData, type, categoryMode }) => {
   const srcImage = `${API_URL}${bookData?.attributes?.image?.data[0]?.attributes?.url}`;
   const categoryTilte = bookData?.attributes?.category?.data?.attributes?.title;
   const bookTitle = bookData?.attributes?.title;
@@ -43,7 +43,7 @@ const BookCard = ({ bookData, type }) => {
     };
     return (
       <div className={styles.imageTitle}>
-        {type === "large" ? (
+        {categoryMode ? (
           <h3 style={headingStyles}>
             {!categoryTilte ? "undefined" : categoryTilte}
           </h3>
