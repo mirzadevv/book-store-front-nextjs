@@ -1,8 +1,6 @@
 import styles from "../../styles/components/categoryButtons/categoryButtons.module.css";
 import Button from "../uiElements/button";
-import { API_URL } from "../../config";
 export default function CategoryButtons() {
-  console.log(result, "RESULT");
   return (
     <div className={styles.categoryButtons}>
       <Button type="category" title="biography" />
