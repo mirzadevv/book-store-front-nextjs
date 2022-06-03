@@ -41,7 +41,7 @@ const Book = ({ bookData, relatedeBooksData, randomReadingPerk }) => {
             {publisherAttributes.data.attributes.title}
           </p>
           <h4 className={styles.title}>Year</h4>
-          <p className={styles.value}>2020</p>
+          <p className={styles.value}>{bookAttributes.year}</p>
         </div>
         <div className={`${styles.description}`}>
           <p className={styles.description}>{bookAttributes.description}</p>
