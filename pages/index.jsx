@@ -1,18 +1,28 @@
 import Head from "next/head";
+import { useState } from "react";
+import { API_URL } from "../config/index";
+import { Pagination } from "antd";
 import MainSwiper from "../components/uiElements/swiper";
 import CategoryButtons from "../components/categoryButtons";
 import BooksByCategory from "../components/booksByCategory";
 import styles from "../styles/pages/index.module.css";
-import { API_URL } from "../config/index";
-import { useState } from "react";
 
 export default function Home({ uniqueBooksCategory, categories }) {
   const [booksByCategory, setBooksByCategory] = useState([]);
   const [isLoaingBooksByCategory, setIsLoaingBooksByCategory] = useState(false);
-  async function getBooksByCategory({ title: categoryTitle }) {
+  const [pageSize, setPageSize] = useState(1);
+  const [categoryTitle, setCategoryTitle] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
+
+  async function handlePaginationChange(page) {
+    setCurrentPage(page);
     const qs = require("qs");
     const query = qs.stringify(
       {
+        pagination: {
+          page: page,
+          pageSize: 5,
+        },
         populate: "*",
         filters: {
           category: {
@@ -31,7 +41,39 @@ export default function Home({ uniqueBooksCategory, categories }) {
     const data = await response.json();
     setBooksByCategory(data);
     setIsLoaingBooksByCategory(false);
+    setPageSize(data?.meta?.pagination?.pageSize);
   }
+
+  async function getBooksByCategory({ title: categoryTitle }) {
+    setCategoryTitle(categoryTitle);
+    const qs = require("qs");
+    const query = qs.stringify(
+      {
+        pagination: {
+          page: 1,
+          pageSize: 5,
+        },
+        populate: "*",
+        filters: {
+          category: {
+            title: {
+              $eq: categoryTitle,
+            },
+          },
+        },
+      },
+      {
+        encodeValuesOnly: true,
+      }
+    );
+    setIsLoaingBooksByCategory(true);
+    const response = await fetch(`http://localhost:1337/api/books?${query}`);
+    const data = await response.json();
+    setBooksByCategory(data);
+    setIsLoaingBooksByCategory(false);
+    setPageSize(data?.meta?.pagination?.pageSize);
+  }
+
   return (
     <div>
       <Head>
@@ -45,6 +87,14 @@ export default function Home({ uniqueBooksCategory, categories }) {
         <BooksByCategory
           booksByCategory={booksByCategory}
           isLoading={isLoaingBooksByCategory}
+        />
+        <Pagination
+          current={currentPage}
+          total={booksByCategory?.meta?.pagination?.total}
+          pageSize={pageSize}
+          className={styles.pagination}
+          showSizeChanger={false}
+          onChange={handlePaginationChange}
         />
       </main>
     </div>
