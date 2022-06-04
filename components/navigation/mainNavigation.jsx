@@ -37,8 +37,9 @@ const MainNavigation = () => {
               <Navbar />
             </div>
           </div>
+          <SearchInput />
+
           <div className={styles.rightSide}>
-            <SearchInput />
             <FaShoppingBasket size={25} className="cursorPointer" />
             <FaBars
               size={25}
