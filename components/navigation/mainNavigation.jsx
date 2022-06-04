@@ -3,6 +3,7 @@ import styles from "../../styles/components/navigation/mainNavigation.module.css
 import MainHeader from "./mainHeader";
 import Navbar from "./navbar";
 import SideDrawer from "./sideDrawer";
+import SearchInput from "../uiElements/searchInput";
 import Link from "next/link";
 import { FaShoppingBasket, FaWindowClose } from "react-icons/fa";
 import { FaBars } from "react-icons/fa";
@@ -37,6 +38,7 @@ const MainNavigation = () => {
             </div>
           </div>
           <div className={styles.rightSide}>
+            <SearchInput />
             <FaShoppingBasket size={25} className="cursorPointer" />
             <FaBars
               size={25}
