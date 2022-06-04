@@ -18,7 +18,7 @@ export default function SearchInput() {
         <input
           onChange={handleChange}
           className={styles.input}
-          placeholder="Search for books, categories, authors, and so on"
+          placeholder="Search everything..."
         />
       </form>
     </>
