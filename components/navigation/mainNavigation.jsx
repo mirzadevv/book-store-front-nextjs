@@ -5,7 +5,12 @@ import Navbar from "./navbar";
 import SideDrawer from "./sideDrawer";
 import SearchInput from "../uiElements/searchInput";
 import Link from "next/link";
-import { FaShoppingBasket, FaWindowClose } from "react-icons/fa";
+import {
+  FaShoppingBasket,
+  FaWindowClose,
+  FaSignInAlt,
+  FaSignOutAlt,
+} from "react-icons/fa";
 import { FaBars } from "react-icons/fa";
 
 const MainNavigation = () => {
@@ -37,9 +42,15 @@ const MainNavigation = () => {
               <Navbar />
             </div>
           </div>
-          <SearchInput />
-
           <div className={styles.rightSide}>
+            <SearchInput />
+            <Link href="/account/login">
+              <FaSignInAlt
+                size={25}
+                style={{ marginRight: "1rem" }}
+                className="cursorPointer"
+              />
+            </Link>
             <FaShoppingBasket size={25} className="cursorPointer" />
             <FaBars
               size={25}
