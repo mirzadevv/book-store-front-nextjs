@@ -1,0 +1,22 @@
+.bookSearch {
+  margin: 0 3rem;
+}
+
+.bookSearch .searchItem {
+  display: flex;
+  margin: 1rem;
+  border: 1px solid black;
+}
+
+.bookSearch .searchItem .imgSide {
+  width: 20%;
+  height: 300px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  /* background-position: center; */
+}
+
+.bookSearch .searchItem .descriptionSide {
+  width: 80%;
+  padding-top: 1rem;
+}
