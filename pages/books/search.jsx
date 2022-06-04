@@ -1,19 +1,21 @@
 import styles from "../../styles/pages/books/search.module.css";
-import { API_URL } from "../../config";
-
+import Link from "next/link";
+import { API_URL } from "../../config/index";
 export default function Search({ result }) {
   return (
     <div className={styles.bookSearch}>
       {result?.data?.map((item) => (
         <div className={styles.searchItem} key={item.id}>
-          <div
-            style={{
-              backgroundImage: `url(
+          <Link href={`/books/${item.id}`}>
+            <div
+              style={{
+                backgroundImage: `url(
                 ${API_URL}${item?.attributes?.image?.data[0]?.attributes?.url}
               )`,
-            }}
-            className={styles.imgSide}
-          ></div>
+              }}
+              className={styles.imgSide}
+            ></div>
+          </Link>
           <div className={styles.descriptionSide}>
             <h4>
               <span style={{ color: "blue" }}>Title: </span>
