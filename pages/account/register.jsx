@@ -1,4 +1,5 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
+import AuthContext from "../../context/authContext";
 import Link from "next/link";
 import styles from "../../styles/pages/account/account.module.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -12,7 +13,16 @@ export default function Login() {
     passwordConfirm: "",
   });
 
-  function handleErrors() {
+  const { username, email, password } = formData;
+
+  const { register, error } = useContext(AuthContext);
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
+
+  function handleValidation() {
     if (
       formData.username.trim() === "" ||
       formData.email.trim() === "" ||
@@ -29,11 +39,12 @@ export default function Login() {
     }
   }
 
-  function handleSubmit(e) {
+  function handleRegister(e) {
     e.preventDefault();
-    const errors = handleErrors();
+    const errors = handleValidation();
     if (!errors) {
       console.log("submitted");
+      register({ username, email, password });
     }
   }
 
@@ -46,7 +57,7 @@ export default function Login() {
   return (
     <div className={styles.login}>
       <ToastContainer />
-      <form onSubmit={handleSubmit} className={styles.form}>
+      <form onSubmit={handleRegister} className={styles.form}>
         <h1>Register</h1>
         <div className={styles.inputContainer}>
           <input
