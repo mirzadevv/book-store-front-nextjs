@@ -1,20 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import AuthContext from "../../context/authContext";
 import styles from "../../styles/components/navigation/mainNavigation.module.css";
 import MainHeader from "./mainHeader";
 import Navbar from "./navbar";
 import SideDrawer from "./sideDrawer";
 import SearchInput from "../uiElements/searchInput";
 import Link from "next/link";
+
 import {
   FaShoppingBasket,
   FaWindowClose,
   FaSignInAlt,
   FaSignOutAlt,
+  FaUser,
 } from "react-icons/fa";
 import { FaBars } from "react-icons/fa";
 
 const MainNavigation = () => {
   const [drawerMode, setDrawerMode] = useState(false);
+  const { user, logout } = useContext(AuthContext);
 
   return (
     <>
@@ -44,14 +48,32 @@ const MainNavigation = () => {
           </div>
           <div className={styles.rightSide}>
             <SearchInput />
-            <Link href="/account/login">
-              <FaSignInAlt
-                size={25}
-                style={{ marginRight: "1rem" }}
-                className="cursorPointer"
-              />
-            </Link>
-            <FaShoppingBasket size={25} className="cursorPointer" />
+
+            {user ? (
+              <>
+                <div className={styles.icon} onClick={logout}>
+                  <FaSignOutAlt size={25} style={{ marginRight: "1rem" }} />
+                  <span>Logout</span>
+                </div>
+                <Link href="/account/dashboard">
+                  <div className={styles.icon}>
+                    <FaUser size={20} style={{ marginRight: "1rem" }} />
+                    <span>Dashboard</span>
+                  </div>
+                </Link>
+                <Link href="/order">
+                  <FaShoppingBasket size={25} className="cursorPointer" />
+                </Link>
+              </>
+            ) : (
+              <Link href="/account/login">
+                <div className={styles.icon}>
+                  <FaSignInAlt size={25} style={{ marginRight: "1rem" }} />
+                  <span>Login</span>
+                </div>
+              </Link>
+            )}
+
             <FaBars
               size={25}
               className={styles.showMode}
