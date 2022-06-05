@@ -5,7 +5,7 @@ import BookCard from "../../components/uiElements/bookCard";
 import Image from "next/image";
 
 const Book = ({ bookData, relatedeBooksData, randomReadingPerk }) => {
-  const { attributes: bookAttributes } = bookData.data;
+  const { attributes: bookAttributes } = bookData?.data;
   const { author: authorAttributes } = bookData.data.attributes;
   const { category: categoryAtributes } = bookData.data.attributes;
   const { publisher: publisherAttributes } = bookData.data.attributes;
@@ -28,7 +28,7 @@ const Book = ({ bookData, relatedeBooksData, randomReadingPerk }) => {
         <div className={styles.firstMainInfo}>
           <h2 className={styles.bookTitle}>{bookAttributes.title}</h2>
           <p className={styles.authorTitle}>
-            {authorAttributes.data.attributes.full_name}
+            {authorAttributes?.data.attributes.full_name}
           </p>
         </div>
         <div className={styles.secondMainInfo}>
