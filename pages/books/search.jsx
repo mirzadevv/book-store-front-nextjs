@@ -4,6 +4,7 @@ import { API_URL } from "../../config/index";
 export default function Search({ result }) {
   return (
     <div className={styles.bookSearch}>
+      {result.data.length === 0 && <h3> There are no result </h3>}
       {result?.data?.map((item) => (
         <div className={styles.searchItem} key={item.id}>
           <Link href={`/books/${item.id}`}>
