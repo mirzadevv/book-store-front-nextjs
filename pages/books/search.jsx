@@ -31,15 +31,15 @@ export default function Search({ result }) {
             </h4>
             <h4>
               <span style={{ color: "blue" }}>Author: </span>
-              {item.attributes.author.data.attributes.full_name}
+              {item.attributes.author?.data.attributes.full_name}
             </h4>
             <h4>
               <span style={{ color: "blue" }}>Category: </span>
-              <span>{item.attributes.category.data.attributes.title}</span>
+              <span>{item.attributes?.category.data.attributes.title}</span>
             </h4>
             <h4>
               <span style={{ color: "blue" }}>Publisher: </span>
-              <span>{item.attributes.publisher.data.attributes.title}</span>
+              <span>{item.attributes?.publisher.data.attributes.title}</span>
             </h4>
           </div>
         </div>
