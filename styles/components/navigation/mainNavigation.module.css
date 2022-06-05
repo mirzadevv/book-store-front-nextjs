@@ -57,6 +57,17 @@
   align-items: center;
 }
 
+.mainNavigation .rightSide .icon {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.mainNavigation .rightSide .icon span {
+  margin-left: -0.5rem;
+}
+
 .mainNavigation .rightSide .showMode {
   display: none;
 }
