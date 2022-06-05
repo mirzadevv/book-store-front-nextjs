@@ -1,12 +1,11 @@
-import { useState, useContext } from "react";
-import Link from "next/link";
+import { useState, useContext, useEffect } from "react";
+import AuthContext from "../../context/authContext";
 import styles from "../../styles/pages/account/account.module.css";
+import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Login() {
-  const [formData, setFormData] = useState({ email: "", password: "" });
-
   /*
   this error handling is not suitable for using toastify, It's suitable when wee keep errors inside an object and use it below the inputs
   const [errors, setErrors] = useState({});
@@ -28,7 +27,16 @@ export default function Login() {
   }
   */
 
-  function handleErrors() {
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const { login, error } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
+
+  function handleValidation() {
     if (formData.email.trim() === "" || formData.password.trim() === "") {
       toast.error("You need to fill all fields");
       return true;
@@ -37,11 +45,12 @@ export default function Login() {
     }
   }
 
-  function handleSubmit(e) {
+  function handleLogin(e) {
     e.preventDefault();
-    const errors = handleErrors();
+    const errors = handleValidation();
     if (!errors) {
       console.log("submitted");
+      login(formData);
     }
   }
 
@@ -54,7 +63,7 @@ export default function Login() {
   return (
     <div className={styles.login}>
       <ToastContainer />
-      <form onSubmit={handleSubmit} className={styles.form}>
+      <form onSubmit={handleLogin} className={styles.form}>
         <h1>Login</h1>
         <div className={styles.inputContainer}>
           <input
