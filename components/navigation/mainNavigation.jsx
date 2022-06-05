@@ -39,7 +39,7 @@ const MainNavigation = () => {
           <div className={styles.leftSide}>
             <div className={styles.title}>
               <Link href="/">
-                <a>Mirzaei</a>
+                <a>BookStore</a>
               </Link>
             </div>
             <div className={styles.navbarDesktopMode}>
